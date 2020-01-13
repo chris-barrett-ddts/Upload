@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Your files
+{% endblock %}
+
+{% block beforeContent %}
+  {{ govukBackLink({
+    text: "Back",
+    href: "/add-files"
+  }) }}
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+{% if data['fileRemoved'].length %}
+<div id="hide">
+<div class="govuk-error-summary" style="border-color:#00703c;padding:10px;" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+  <div class="govuk-error-summary__body">
+    <svg class="moj-banner__icon" style="float:left;" fill="#00703c" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" height="25" width="25">
+    <path style="color:#00703c;" d="M25,6.2L8.7,23.2L0,14.1l4-4.2l4.7,4.9L21,2L25,6.2z" /></svg>
+  <span style="margin-left:10px;"class="moj-banner__assistive" id="message">{{data['fileRemoved']}} has been removed</span></div>
+  </div>
+</div>
+{% endif %}
+
+
+{{data|dump}}
+<h1 class="govuk-heading-xl">Your files</h1>
+
+
+      <form method="post" enctype="multipart/form-data" novalidate>
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__value">
+              File
+            </dt>
+            <dd class="govuk-summary-list__actions">
+              Action
+            </dd>
+          </div>
+          {% for i in data['files'] %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__value">
+              {{i}}
+            </dt>
+            <dd class="govuk-summary-list__actions">
+              <button type="submit" class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0" name="remove" data-module="govuk-button" value="{{i}}">
+              Remove
+              </button>
+            </dd>
+          </div>
+{% endfor %}
+<dl>
+
+<br>
+  <a href="add-files" class="govuk-link govuk-link--no-visited-state">Add another file</a>
+  <br>
+  <br>
+
+  {{ govukButton({
+    text: "Continue"
+  }) }}
+      </form>
+    </div>
+  </div>
+{% endblock %}

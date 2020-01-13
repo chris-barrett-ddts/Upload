@@ -1,0 +1,23 @@
+
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-xl">
+        The GOV.UK Prototype Kit
+        <span class="govuk-caption-xl">{{releaseVersion}}</span>
+      </h1>{{releaseVersion | log }}
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="/add-files">Multer test</a></li>
+      </ul>
+    </div>
+</div>
+
+{% endblock %}
